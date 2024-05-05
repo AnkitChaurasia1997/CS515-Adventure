@@ -14,20 +14,21 @@ class Adventure:
             map_data = json.load(file)
             # Validate map
             if 'start' not in map_data or 'rooms' not in map_data:
-                print("Invalid map file: Missing 'start' or 'rooms' key.")
+                print("Invalid map file: Missing 'start' or 'rooms' key.", file=sys.stderr)
                 sys.exit(1)
             room_names = set()
             for room in map_data['rooms']:
                 if 'name' not in room or 'desc' not in room or 'exits' not in room:
-                    print("Invalid map file: Missing required fields in rooms.")
+                    print("Invalid map file: Missing required fields in rooms.", file=sys.stderr)
                     sys.exit(1)
                 if room['name'] in room_names:
-                    print("Invalid map file: Duplicate room names.")
+                    print("Invalid map file: Duplicate room names.", file=sys.stderr)
                     sys.exit(1)
+
                 room_names.add(room['name'])
             for exit_room in room['exits'].values():
                 if exit_room not in room_names:
-                    print("Invalid map file: Exit points to non-existent room.")
+                    print("Invalid map file: Exit points to non-existent room.", file=sys.stderr)
                     sys.exit(1)
             # Extract start room
             self.start_room = map_data['start']
@@ -119,7 +120,7 @@ class Adventure:
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python3 adventure.py [map filename]")
+        print("Usage: python3 adventure.py [map filename]", file=sys.stderr)
         sys.exit(1)
     map_file = sys.argv[1]
     adventure_game = Adventure(map_file)

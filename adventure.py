@@ -73,7 +73,7 @@ class Adventure:
 
     def quit(self):
         print("Goodbye!")
-        sys.exit(1)
+        sys.exit(0)
 
     def command_prompt(self, command):
         parts = command.split()

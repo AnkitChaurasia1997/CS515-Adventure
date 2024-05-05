@@ -25,6 +25,10 @@ class Adventure:
                     print("Invalid map file: Duplicate room names.")
                     sys.exit(1)
                 room_names.add(room['name'])
+            for exit_room in room['exits'].values():
+                if exit_room not in room_names:
+                    print("Invalid map file: Exit points to non-existent room.")
+                    sys.exit(1)
             # Extract start room
             self.start_room = map_data['start']
             # Extract rooms

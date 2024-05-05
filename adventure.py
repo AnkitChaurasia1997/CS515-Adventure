@@ -44,7 +44,7 @@ class Adventure:
         print(f"> {current_room['name']}\n")
         print(f"{current_room['desc']}\n")
         if 'items' in self.rooms[self.current_room]:
-            item = " ".join(self.rooms[self.current_room]['items'])
+            item = ", ".join(self.rooms[self.current_room]['items'])
             if item:
                 print(f"Items: {item}\n")
         exits = " ".join(current_room['exits'].keys())

@@ -113,10 +113,16 @@ class Adventure:
     def play(self):
         self.look()
         while True:
-            command = input("What would you like to do? ").strip().lower()
-            if not command:
-                continue
-            self.command_prompt(command)
+            try:
+                command = input("What would you like to do? ").strip().lower()
+                if not command:
+                    continue
+                self.command_prompt(command)
+            except EOFError:
+                print("Use 'quit' to exit.")
+            except KeyboardInterrupt:
+                print("\nGoodbye!")
+                sys.exit(0)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

@@ -58,9 +58,9 @@ class Adventure:
                 print(f"You pick up the {item}.")
                 items.remove(item)
             else:
-                print(f"There's no {item} here.")
+                print(f"There's no {item} anywhere.")
         else:
-            print("There are no items here.")
+            print(f"There's no {item} anywhere.")
 
     def inventory(self):
         if len(self.inventory_items) > 0:

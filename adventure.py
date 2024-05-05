@@ -55,6 +55,14 @@ class Adventure:
         exits = " ".join(current_room['exits'].keys())
         print(f"Exits: {exits}\n")
 
+    def drop(self, item):
+        if item in self.inventory_items:
+            print(f"You drop the {item}.")
+            self.inventory_items.remove(item)  # Remove item from player's inventory
+            self.rooms[self.current_room].setdefault('items', []).append(item)  # Add item to room
+        else:
+            print(f"You don't have {item} in your inventory.")
+
     def get(self, item):
         if 'items' in self.rooms[self.current_room]:
             items = self.rooms[self.current_room]['items']
@@ -101,6 +109,11 @@ class Adventure:
             self.quit()
         elif verb == 'help':
             self.help()
+        elif verb == 'drop':
+            if len(parts) > 1:
+                self.drop(" ".join(parts[1:]))
+            else:
+                print("Sorry, you need to 'drop' something.")
         else:
             print("I don't understand that command.")
 

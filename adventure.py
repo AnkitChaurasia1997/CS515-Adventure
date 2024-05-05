@@ -1,5 +1,7 @@
 import json
 import sys
+import traceback
+import inspect
 
 class Adventure:
     def __init__(self, map_file):

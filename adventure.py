@@ -33,7 +33,7 @@ class Adventure:
     def go(self, direction):
         exits = self.rooms[self.current_room]['exits']
         if direction in exits:
-            print(f"You go {direction}.")
+            print(f"You go {direction}.\n")
             self.current_room = exits[direction]
             self.look()
         else:
@@ -44,10 +44,10 @@ class Adventure:
         print(f"> {current_room['name']}\n")
         print(f"{current_room['desc']}\n")
         if 'items' in self.rooms[self.current_room]:
-            item = ", ".join(self.rooms[self.current_room]['items'])
+            item = " ".join(self.rooms[self.current_room]['items'])
             if item:
                 print(f"Items: {item}\n")
-        exits = ", ".join(current_room['exits'].keys())
+        exits = " ".join(current_room['exits'].keys())
         print(f"Exits: {exits}\n")
 
     def get(self, item):

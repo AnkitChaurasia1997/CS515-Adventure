@@ -143,7 +143,7 @@ class Adventure:
             print("I don't understand that command.")
 
     def help(self):
-        verbs = ['go', 'look', 'get', 'inventory', 'quit', 'help']
+        verbs = ['go ...', 'look', 'get ...', 'inventory', 'quit', 'help','drop ...','unlock ...']
         print("You can run the following commands:")
         for verb in verbs:
             print(f"  {verb}")

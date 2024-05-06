@@ -38,6 +38,10 @@ class Adventure:
     def go(self, direction):
         exits = self.rooms[self.current_room]['exits']
         if direction in exits:
+            if 'locked' in self.rooms[exits[direction]]:
+                if self.rooms[exits[direction]]['locked'] == "true":
+                    print("The door is locked, you need to unlock the door.")
+                    return True    
             print(f"You go {direction}.\n")
             self.current_room = exits[direction]
             self.look()
@@ -87,6 +91,22 @@ class Adventure:
     def quit(self):
         print("Goodbye!")
         sys.exit(0)
+    
+    def unlock(self, direction):
+        current_room = self.rooms[self.current_room]
+        if direction not in current_room['exits'].keys():
+            print(f"There's no door in the {dir}.")
+        else:
+            temp_room = current_room['exits'][direction]
+            if "locked" in self.rooms[temp_room].keys() and self.rooms[temp_room]["locked"] == "true":
+                key = self.rooms[temp_room]["key"]
+                if key in self.inventory_items:
+                    print("You have now unlocked the door! You can go in!")
+                    self.rooms[temp_room]["locked"] = "false"
+                else:
+                    print("You don't have the correct key to unlock the door.")
+            else:
+                print("The door is already unlocked.")
 
     def command_prompt(self, command):
         parts = command.split()
@@ -114,6 +134,11 @@ class Adventure:
                 self.drop(" ".join(parts[1:]))
             else:
                 print("Sorry, you need to 'drop' something.")
+        elif verb == 'unlock':
+            if len(parts) > 1:
+                self.unlock(parts[1])
+            else:
+                print("Sorry, you need to specify the direction to unlock.")
         else:
             print("I don't understand that command.")
 
